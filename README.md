@@ -1,38 +1,66 @@
-Role Name
-=========
+# Ansible Role: Munin-Contrib [![Build Status](https://travis-ci.org/deveth0/ansible-munin-contrib.svg?branch=master)](https://travis-ci.org/deveth0/ansible-munin-contrib)
 
-A brief description of the role goes here.
+Checks out the [munin-contrib](https://github.com/munin-monitoring/contrib) Repository and links the configured plugins to /etc/munin/plugins
 
-Requirements
-------------
+## Installation
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+You can either use ansible-galaxy to install this role:
 
-Role Variables
---------------
+    ansible-galaxy install deveth0.munin-contrib
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Or checkout this git-repository to your roles directory:
 
-Dependencies
-------------
+    git clone https://github.com/deveth0/ansible-munin-contrib.git deveth0.munin-contrib
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+## Role Variables
 
-Example Playbook
-----------------
+Available variables are listed below:
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+    path: The path (basepath /plugins/) to the plugin in contrib-repository
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+    target:  The target name for the plugin
+    
+e.g. if you want to link [/plugins/apache/apache_watch_](https://github.com/munin-monitoring/contrib/blob/master/plugins/apache/apache_watch_) to /etc/munin/plugins/apache_watch_foo:
 
-License
--------
+    - { path: 'apache/apache_watch_', target: 'apache_watch_foo' }
 
-BSD
+    
 
-Author Information
-------------------
+## Dependencies
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+No dependencies required
+
+## Example Playbook
+
+
+- name: Install munin-contrib plugins
+  hosts: all
+
+  roles:
+    - role: munin-contrib
+      contrib_plugins:
+        - { path: 'mail/dovecot', target: 'dovecot' }
+        - { path: 'mail/postfix_filtered', target: 'postfix_filtered' }
+        - { path: 'mail/mail_connections', target: 'mail_connections' }
+        - { path: 'mail/postfix_mail_stats', target: 'postfix_mail_stats'}
+        - { path: 'mail/postfix_mailstats', target: 'postfix_mailstats'}
+        - { path: 'mail/dovecot', target: 'dovecot'}
+       
+
+
+## Example Hosts
+
+This host file creates two Container
+
+    [newVMs]
+    10.0.2.51 lxc_net_ip=10.0.2.51 lxc_id=251
+    10.0.2.52 lxc_net_ip=10.0.2.52 lxc_id=252
+
+
+## License
+
+Apache License 2.0
+
+## Author Information
+
+This Role was created by [Alex Muthmann](http://dev-eth0.de).
