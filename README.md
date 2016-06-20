@@ -37,7 +37,7 @@ No dependencies required
   hosts: all
 
   roles:
-    - role: munin-contrib
+    - role: deveth0.munin-contrib
       contrib_plugins:
         - { path: 'mail/dovecot', target: 'dovecot' }
         - { path: 'mail/postfix_filtered', target: 'postfix_filtered' }
