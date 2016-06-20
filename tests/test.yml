@@ -3,6 +3,6 @@
   remote_user: root
 
   roles:
-    - role: munin-contrib
+    - role: ansible-munin-contrib
       contrib_plugins:
         - { path: 'mail/dovecot', target: 'dovecot' }
