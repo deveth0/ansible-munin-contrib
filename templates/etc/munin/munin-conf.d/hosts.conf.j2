@@ -1,0 +1,8 @@
+# Munin-node {{ node_name }}.
+[{{ node_name }}]
+    address {{ node_address }}
+{% if node_extras is defined %}
+{% for extra in node_extras %}
+    {{ extra }}
+{% endfor %}
+{% endif %}

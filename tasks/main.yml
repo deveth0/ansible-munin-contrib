@@ -1,0 +1,21 @@
+---
+
+- name: Install git
+  apt: name={{ item }} state=present
+  with_items:
+    - git
+    - munin-node
+
+
+- name: Checkout repo
+  git: repo=https://github.com/munin-monitoring/contrib.git dest=/opt/munin-contrib
+
+
+- name: Link plugins
+  file: src=/opt/munin-contrib/plugins/{{ item.path }} dest=/etc/munin/plugins/{{ item.target }} state=link
+  with_items: "{{ contrib_plugins }}"
+
+
+- name: Restart munin-node
+  service: name=munin-node state=restarted
+
