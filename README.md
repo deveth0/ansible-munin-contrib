@@ -48,14 +48,6 @@ No dependencies required
        
 
 
-## Example Hosts
-
-This host file creates two Container
-
-    [newVMs]
-    10.0.2.51 lxc_net_ip=10.0.2.51 lxc_id=251
-    10.0.2.52 lxc_net_ip=10.0.2.52 lxc_id=252
-
 
 ## License
 
